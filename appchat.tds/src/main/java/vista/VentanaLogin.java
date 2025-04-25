@@ -1,3 +1,5 @@
+package main.java.vista;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,8 +20,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
-public class VentanaLogin{
+public class VentanaLogin {
 
 	private JFrame frmLogin;
 	private JPanel panel;
@@ -28,9 +31,9 @@ public class VentanaLogin{
 	private JButton botonCancelar;
 	private JButton botonRegistrar;
 	private JTextField txtTelefono;
-	private JTextField txtContrasea;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -117,13 +120,12 @@ public class VentanaLogin{
 		gbc_lblNewLabel_2.gridy = 4;
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		txtContrasea = new JTextField();
-		txtContrasea.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_txtContrasea = new GridBagConstraints();
-		gbc_txtContrasea.gridx = 2;
-		gbc_txtContrasea.gridy = 4;
-		panel.add(txtContrasea, gbc_txtContrasea);
-		txtContrasea.setColumns(20);
+		passwordField = new JPasswordField();
+		GridBagConstraints gbc_passwordField = new GridBagConstraints();
+		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.gridx = 2;
+		gbc_passwordField.gridy = 4;
+		panel.add(passwordField, gbc_passwordField);
 		
 		panel_1 = new JPanel();
 		frmLogin.getContentPane().add(panel_1, BorderLayout.SOUTH);

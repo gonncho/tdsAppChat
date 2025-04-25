@@ -1,4 +1,4 @@
-package vista;
+package main.java.vista;
 
 public class P1 {
 
