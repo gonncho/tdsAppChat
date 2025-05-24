@@ -1,163 +1,75 @@
 package vista;
 
-
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.border.TitledBorder;
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
-
 
 public class VentanaLogin {
 
-	private JFrame frmLogin;
-	private JPanel panel;
-	private JPanel panel_1;
-	private JButton botonAceptar;
-	private JButton botonCancelar;
-	private JButton botonRegistrar;
-	private JTextField txtTelefono;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JPasswordField passwordField;
+    private final JFrame frame;
+    private final JTextField txtTelefono;
+    private final JPasswordField txtPassword;
+    private final JButton btnAceptar;
+    private final JButton btnRegistrar;
+    private final JButton btnCancelar;
 
-	/**
-	 * Launch the application.
-	 */
-	
-	public JFrame getFrame() {
-		return frmLogin;
-	}
+    public VentanaLogin() {
+        frame = new JFrame("Login");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setLayout(new BorderLayout());
 
-	public void setFrame(JFrame frame) {
-		this.frmLogin = frame;
-	}
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaLogin window = new VentanaLogin();
-					window.frmLogin.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+        // Cabecera
+        JLabel lblTitulo = new JLabel("AppChat", SwingConstants.CENTER);
+        lblTitulo.setFont(lblTitulo.getFont().deriveFont(Font.PLAIN, 30f));
+        frame.add(lblTitulo, BorderLayout.NORTH);
 
-	/**
-	 * Create the application.
-	 */
-	public VentanaLogin() {
-		initialize();
-	}
+        // Panel central
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(new TitledBorder(
+            new EtchedBorder(EtchedBorder.LOWERED, Color.white, Color.lightGray),
+            "Login"
+        ));
+        frame.add(panel, BorderLayout.CENTER);
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		
-		frmLogin = new JFrame();
-		frmLogin.setTitle("Login");
-		frmLogin.setResizable(false);
-		frmLogin.setBounds(100, 100, 450, 300);
-		frmLogin.setLocationRelativeTo(null);
-		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JLabel lblNewLabel = new JLabel("AppChat");
-		lblNewLabel.setFont(new Font("Reem Kufi", Font.PLAIN, 30));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		frmLogin.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
-		
-		panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Login", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		frmLogin.getContentPane().add(panel, BorderLayout.CENTER);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{40, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{40, 20, 0, 30, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
-		
-		lblNewLabel_1 = new JLabel("Telefono:");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 1;
-		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
-		txtTelefono = new JTextField();
-		txtTelefono.setToolTipText("");
-		txtTelefono.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_txtTelefono = new GridBagConstraints();
-		gbc_txtTelefono.insets = new Insets(0, 0, 5, 0);
-		gbc_txtTelefono.gridx = 2;
-		gbc_txtTelefono.gridy = 1;
-		panel.add(txtTelefono, gbc_txtTelefono);
-		txtTelefono.setColumns(20);
-		
-		lblNewLabel_2 = new JLabel("Contraseña:");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_2.gridx = 1;
-		gbc_lblNewLabel_2.gridy = 4;
-		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		passwordField = new JPasswordField();
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField.gridx = 2;
-		gbc_passwordField.gridy = 4;
-		panel.add(passwordField, gbc_passwordField);
-		
-		panel_1 = new JPanel();
-		frmLogin.getContentPane().add(panel_1, BorderLayout.SOUTH);
-		
-		botonRegistrar = new JButton("Registrar");
-		botonRegistrar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				VentanaRegistro vr = new VentanaRegistro();
-				vr.mostrar();
-				frmLogin.dispose();
-			}
-		});
-		panel_1.add(botonRegistrar);
-		
-		botonAceptar = new JButton("Aceptar");
-		panel_1.add(botonAceptar);
-		
-		botonCancelar = new JButton("Cancelar");
-		botonCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		panel_1.add(botonCancelar);
-	}
-	
-	void mostrar() {
-		frmLogin.setVisible(true);
-	}
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets(5,5,5,5);
+        c.fill   = GridBagConstraints.HORIZONTAL;
 
+        // Teléfono
+        c.gridx = 0; c.gridy = 0; c.weightx = 0; panel.add(new JLabel("Teléfono:"), c);
+        c.gridx = 1; c.gridy = 0; c.weightx = 1; txtTelefono = new JTextField(20); panel.add(txtTelefono, c);
 
+        // Contraseña
+        c.gridx = 0; c.gridy = 1; c.weightx = 0; panel.add(new JLabel("Contraseña:"), c);
+        c.gridx = 1; c.gridy = 1; c.weightx = 1; txtPassword = new JPasswordField(20); panel.add(txtPassword, c);
+
+        // Botones
+        JPanel botones = new JPanel();
+        btnRegistrar = new JButton("Registrar");
+        btnAceptar   = new JButton("Aceptar");
+        btnCancelar  = new JButton("Cancelar");
+        botones.add(btnRegistrar);
+        botones.add(btnAceptar);
+        botones.add(btnCancelar);
+        frame.add(botones, BorderLayout.SOUTH);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+    }
+
+    // — Getters para modelo/controlador —
+    public String getTelefono()   { return txtTelefono.getText().trim(); }
+    public String getPassword()   { return new String(txtPassword.getPassword()); }
+
+    // — Inyección de ActionListeners —
+    public void addLoginListener(ActionListener l)    { btnAceptar.addActionListener(l); }
+    public void addRegisterListener(ActionListener l) { btnRegistrar.addActionListener(l); }
+    public void addCancelListener(ActionListener l)   { btnCancelar.addActionListener(l); }
+
+    // — Mostrar / ocultar —
+    public void mostrar() { frame.setVisible(true); }
+    public void ocultar()  { frame.setVisible(false); }
 }
