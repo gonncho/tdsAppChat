@@ -6,6 +6,7 @@ import modelo.ContactoIndividual;
 import modelo.Grupo;
 import modelo.Mensaje;
 import modelo.FactoriaDescuento;
+import persistencia.RepositorioUsuarios;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,10 +16,13 @@ public class ModeloTest {
     public static void main(String[] args) {
         // 1) Creo un usuario de ejemplo
         Usuario u = new Usuario.Builder("Prueba", "prueba@ej.com", "600000000", "1234")
-                        .fechaNacimiento(LocalDate.now().minusYears(2))
+                        .fechaNacimiento(LocalDate.of(1990,1,1))
+                        .fechaRegistro(LocalDate.now().minusYears(6))
+                        .saludo("Hola, soy demo")
                         .premium(true)
                         .build();
         System.out.println("Usuario creado: " + u.getNombre() + ", tel=" + u.getTelefono());
+        System.out.println("Saludo: " + u.getSaludo() + ", registrado el " + u.getFechaRegistro());
 
         // 2) Creo un contacto individual y un grupo
         ContactoIndividual ci = FactoriaContacto.crearIndividual("Amigo", "611111111");
@@ -41,8 +45,9 @@ public class ModeloTest {
         System.out.printf("Descuento por fecha (años>=5): %.2f%n", descFecha);
         System.out.printf("Descuento por mensajes (>=100): %.2f%n", descMensajes);
 
-        // 5) Pruebo login simulado (sin repositorio, solo comprobación de contraseña)
-        boolean loginOk = u.getContrasenia().equals("1234");
-        System.out.println("Simulación login con '1234': " + (loginOk ? "OK" : "FAIL"));
+        // 5) Uso del repositorio en memoria para registrar y validar login
+        RepositorioUsuarios.INSTANCE.add(u);
+        boolean loginOk = RepositorioUsuarios.INSTANCE.login("600000000", "1234");
+        System.out.println("Login a través del repositorio: " + (loginOk ? "OK" : "FAIL"));
     }
 }
