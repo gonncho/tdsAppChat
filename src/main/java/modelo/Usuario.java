@@ -15,7 +15,9 @@ public class Usuario {
     private final String telefono;
     private final String contrasenia;
     private final LocalDate fechaNacimiento;  // opcional
-    private final String imagenPerfil;        // opcional (ruta o URL)
+    private final LocalDate fechaRegistro;    // alta en el sistema
+    private final String  saludo;             // opcional
+    private final String  imagenPerfil;       // opcional (ruta o URL)
     private final boolean isPremium;
 
     // — Campos mutables (listas) —
@@ -29,6 +31,8 @@ public class Usuario {
         this.telefono        = b.telefono;
         this.contrasenia     = b.contrasenia;
         this.fechaNacimiento = b.fechaNacimiento;
+        this.fechaRegistro   = b.fechaRegistro != null ? b.fechaRegistro : LocalDate.now();
+        this.saludo          = b.saludo;
         this.imagenPerfil    = b.imagenPerfil;
         this.isPremium       = b.isPremium;
     }
@@ -40,6 +44,8 @@ public class Usuario {
     public String getTelefono()         { return telefono; }
     public String getContrasenia()      { return contrasenia; }
     public LocalDate getFechaNacimiento(){ return fechaNacimiento; }
+    public LocalDate getFechaRegistro() { return fechaRegistro; }
+    public String getSaludo()           { return saludo; }
     public String getImagenPerfil()     { return imagenPerfil; }
     public boolean isPremium()          { return isPremium; }
 
@@ -75,6 +81,8 @@ public class Usuario {
 
         // opcionales con valores por defecto
         private LocalDate fechaNacimiento = null;
+        private LocalDate fechaRegistro  = null;
+        private String   saludo          = "";
         private String   imagenPerfil    = null;
         private boolean  isPremium       = false;
 
@@ -87,6 +95,16 @@ public class Usuario {
 
         public Builder fechaNacimiento(LocalDate fecha) {
             this.fechaNacimiento = fecha;
+            return this;
+        }
+
+        public Builder fechaRegistro(LocalDate fecha) {
+            this.fechaRegistro = fecha;
+            return this;
+        }
+
+        public Builder saludo(String saludo) {
+            this.saludo = saludo;
             return this;
         }
 

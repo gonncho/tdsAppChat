@@ -17,7 +17,7 @@ public class DescuentoPorFecha implements Descuento {
  @Override
  public double calcularDescuento(Usuario u) {
      LocalDate hoy = LocalDate.now();
-     LocalDate alta = u.getFechaNacimiento(); // o fecha de registro si la guardas ahí
+     LocalDate alta = u.getFechaRegistro();
      long años = ChronoUnit.YEARS.between(alta, hoy);
      return (años >= añosMinimos) ? factor : 0.0;
  }
