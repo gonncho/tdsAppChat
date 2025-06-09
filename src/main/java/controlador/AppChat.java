@@ -108,4 +108,51 @@ public class AppChat {
         contacto.addMensaje(m);
         return m;
     }
+    
+
+    /**
+     * Busca mensajes del usuario actual filtrando por fragmento de texto,
+     * nombre de contacto o teléfono. Cualquiera de los parámetros puede ser
+     * null para indicar que no se aplica dicho filtro.
+     *
+     * @param fragmento parte del contenido a buscar (ignora mayúsculas/minúsculas)
+     * @param nombre nombre del contacto (coincidencia parcial, ignora mayúsculas)
+     * @param telefono teléfono del contacto
+     * @return lista de resultados ordenados por fecha de envío
+     */
+    public java.util.List<modelo.ResultadoBusqueda> buscarMensajes(String fragmento,
+                                                                   String nombre,
+                                                                   String telefono) {
+        if (usuarioActual == null) return java.util.List.of();
+
+        String frag = fragmento == null ? null : fragmento.toLowerCase();
+        String nom  = nombre    == null ? null : nombre.toLowerCase();
+
+        java.util.List<modelo.ResultadoBusqueda> res = new java.util.ArrayList<>();
+
+        for (Contacto c : usuarioActual.getContactos()) {
+            boolean okNombre = nom == null;
+            if (!okNombre && c.getNombre() != null) {
+                okNombre = c.getNombre().toLowerCase().contains(nom);
+            }
+
+            boolean okTel = telefono == null;
+            if (!okTel && c.getTelefono() != null) {
+                okTel = c.getTelefono().contains(telefono);
+            }
+
+            if (okNombre && okTel) {
+                for (Mensaje m : c.getMensajes()) {
+                    boolean okFrag = frag == null ||
+                                     (m.getContenido() != null && m.getContenido().toLowerCase().contains(frag));
+                    if (okFrag) {
+                        res.add(new modelo.ResultadoBusqueda(c, m));
+                    }
+                }
+            }
+        }
+
+        res.sort(java.util.Comparator.comparing(r -> r.mensaje().getFechaEnvio()));
+        return res;
+    }
 }

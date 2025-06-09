@@ -1,6 +1,8 @@
 package vista;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import tds.BubbleText;
@@ -85,6 +87,17 @@ public class VentanaPrincipal extends JFrame {
         return listContactos.getSelectedValue();
     }
 
+    /** Texto introducido en el campo de mensaje */
+    public String getTextoMensaje() {
+        return txtMensaje.getText().trim();
+    }
+
+    /** Muestra el nombre e imagen del usuario logado */
+    public void setUsuarioInfo(String nombre, Icon foto) {
+        lblUsuario.setText(nombre != null ? nombre : "Usuario");
+        lblFotoPerfil.setIcon(foto);
+    }
+    
     // — Métodos para inyectar listeners —
     public void addContactosListener(ActionListener l)   { btnContactos.addActionListener(l); }
     public void addPremiumListener(ActionListener l)     { btnPremium.addActionListener(l); }
@@ -121,6 +134,14 @@ public class VentanaPrincipal extends JFrame {
         panelConversacion.repaint();
         scrollToBottom();
     }
+    
+    /** Elimina todas las burbujas del panel de conversación */
+    public void limpiarConversacion() {
+        panelConversacion.removeAll();
+        panelConversacion.revalidate();
+        panelConversacion.repaint();
+    }
+
 
     private void scrollToBottom() {
         SwingUtilities.invokeLater(() -> {

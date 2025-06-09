@@ -10,7 +10,11 @@ public class RepositorioUsuarios {
 
     public static final RepositorioUsuarios INSTANCE = new RepositorioUsuarios();
 
-    private final DAOUsuario dao = new DAOUsuarioTDS();
+    
+    // La línea se comenta para trabajar sin el servicio de persistencia TDS
+//    private final DAOUsuario dao = new DAOUsuarioTDS();
+    
+    private final DAOUsuario dao = new DAOUsuarioMemoria();
     private final Map<String,Usuario> usuarios = new HashMap<>();
 
     private RepositorioUsuarios() { }
