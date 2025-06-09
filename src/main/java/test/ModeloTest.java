@@ -15,10 +15,13 @@ public class ModeloTest {
     public static void main(String[] args) {
         // 1) Creo un usuario de ejemplo
         Usuario u = new Usuario.Builder("Prueba", "prueba@ej.com", "600000000", "1234")
-                        .fechaNacimiento(LocalDate.now().minusYears(2))
+                        .fechaNacimiento(LocalDate.of(1990,1,1))
+                        .fechaRegistro(LocalDate.now().minusYears(6))
+                        .saludo("Hola, soy demo")
                         .premium(true)
                         .build();
         System.out.println("Usuario creado: " + u.getNombre() + ", tel=" + u.getTelefono());
+        System.out.println("Saludo: " + u.getSaludo() + ", registrado el " + u.getFechaRegistro());
 
         // 2) Creo un contacto individual y un grupo
         ContactoIndividual ci = FactoriaContacto.crearIndividual("Amigo", "611111111");
