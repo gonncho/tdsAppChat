@@ -6,6 +6,7 @@ import modelo.ContactoIndividual;
 import modelo.Grupo;
 import modelo.Mensaje;
 import modelo.FactoriaDescuento;
+import persistencia.RepositorioUsuarios;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,8 +45,9 @@ public class ModeloTest {
         System.out.printf("Descuento por fecha (años>=5): %.2f%n", descFecha);
         System.out.printf("Descuento por mensajes (>=100): %.2f%n", descMensajes);
 
-        // 5) Pruebo login simulado (sin repositorio, solo comprobación de contraseña)
-        boolean loginOk = u.getContrasenia().equals("1234");
-        System.out.println("Simulación login con '1234': " + (loginOk ? "OK" : "FAIL"));
+        // 5) Uso del repositorio en memoria para registrar y validar login
+        RepositorioUsuarios.INSTANCE.add(u);
+        boolean loginOk = RepositorioUsuarios.INSTANCE.login("600000000", "1234");
+        System.out.println("Login a través del repositorio: " + (loginOk ? "OK" : "FAIL"));
     }
 }

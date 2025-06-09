@@ -1,6 +1,7 @@
 package vista;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import tds.BubbleText;
@@ -8,7 +9,6 @@ import java.util.function.BiConsumer;
 
 public class VentanaPrincipal extends JFrame {
 
-    private final JComboBox<String>    comboContactos;
     private final JButton              btnContactos, btnPremium, btnBuscar;
     private final JLabel               lblUsuario, lblFotoPerfil;
     private final DefaultListModel<String> contactosModel;
@@ -63,7 +63,7 @@ public class VentanaPrincipal extends JFrame {
         // Menu de emojis
         emojiMenu = new JPopupMenu();
         for (int i = 0; i < 8; i++) {
-            JMenuItem it = new JMenuItem(new ImageIcon(BubbleText.getEmoji(i)));
+            JMenuItem it = new JMenuItem(BubbleText.getEmoji(i));
             final int idx=i;
             it.addActionListener(e -> fireEmojiSent(idx));
             emojiMenu.add(it);

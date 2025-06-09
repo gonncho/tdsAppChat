@@ -10,7 +10,9 @@ public class RepositorioUsuarios {
 
     public static final RepositorioUsuarios INSTANCE = new RepositorioUsuarios();
 
-    private final DAOUsuario dao = new DAOUsuarioTDS();
+    // Por defecto usamos la implementación en memoria para
+    // poder probar la aplicación sin la capa de persistencia TDS.
+    private final DAOUsuario dao = new DAOUsuarioMemoria();
     private final Map<String,Usuario> usuarios = new HashMap<>();
 
     private RepositorioUsuarios() { }
