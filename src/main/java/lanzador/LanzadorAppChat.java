@@ -4,9 +4,7 @@ import controlador.AppChat;
 import modelo.Contacto;
 import modelo.Mensaje;
 import modelo.Usuario;
-import vista.VentanaLogin;
-import vista.VentanaPrincipal;
-import vista.VentanaRegistro;
+import vista.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -20,6 +18,9 @@ public class LanzadorAppChat {
     private final VentanaLogin login = new VentanaLogin();
     private final VentanaRegistro registro = new VentanaRegistro();
     private final VentanaPrincipal principal = new VentanaPrincipal();
+    private final VentanaNuevoContacto ventanaContacto = new VentanaNuevoContacto();
+    private final VentanaNuevoGrupo    ventanaGrupo    = new VentanaNuevoGrupo();
+    private final VentanaBusqueda     ventanaBusqueda = new VentanaBusqueda();
     private String rutaImagenRegistro = null;
 
     public LanzadorAppChat() {
@@ -98,6 +99,8 @@ public class LanzadorAppChat {
     private void configurarPrincipal() {
         principal.addSendListener(e -> enviarMensaje());
         principal.addContactSelectionListener(e -> mostrarConversacion());
+        principal.addContactosListener(e -> mostrarVentanaNuevoContacto());
+        principal.addBuscarListener(e -> mostrarVentanaBusqueda());
     }
 
     private void actualizarPrincipal() {
@@ -140,6 +143,43 @@ public class LanzadorAppChat {
         app.enviarMensajeContacto(c, texto, -1, Mensaje.Tipo.ENVIADO);
         principal.addSentBubble(texto);
     }
+    
+    private void mostrarVentanaNuevoContacto() {
+        ventanaContacto.mostrar();
+        ventanaContacto.addAcceptListener(e -> {
+            Contacto nuevo = app.agregarContacto(
+                    ventanaContacto.getNombre(),
+                    ventanaContacto.getTelefono());
+            if (nuevo != null) {
+                actualizarPrincipal();
+                ventanaContacto.ocultar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Teléfono no encontrado");
+            }
+        });
+        ventanaContacto.addCancelListener(e -> ventanaContacto.ocultar());
+    }
+
+    private void mostrarVentanaBusqueda() {
+        ventanaBusqueda.addSearchListener(e -> realizarBusqueda());
+        ventanaBusqueda.addCloseListener(e -> ventanaBusqueda.ocultar());
+        ventanaBusqueda.mostrar();
+    }
+
+    private void realizarBusqueda() {
+        java.util.List<modelo.ResultadoBusqueda> res = app.buscarMensajes(
+                ventanaBusqueda.getTexto().isEmpty() ? null : ventanaBusqueda.getTexto(),
+                ventanaBusqueda.getNombre().isEmpty() ? null : ventanaBusqueda.getNombre(),
+                ventanaBusqueda.getTelefono().isEmpty() ? null : ventanaBusqueda.getTelefono());
+        java.util.List<String> textos = res.stream()
+                .map(r -> String.format("%s [%s]: %s",
+                        r.contacto().toString(),
+                        r.mensaje().getFechaEnvio(),
+                        r.mensaje().getContenido()))
+                .toList();
+        ventanaBusqueda.setResultados(textos);
+    }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
