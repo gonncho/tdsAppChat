@@ -1,0 +1,28 @@
+Nombre completo: Laura Sánchez López
+Email: laura.sanchez@gmail.com
+Teléfono: 656789012
+Contraseña: laura7890
+Saludo: "Apasionada de los libros, el cine y las buenas conversaciones. ¡Encantada de conoceros!"
+Fecha de nacimiento: 12/08/1992
+
+Nombre completo: Javier Gómez
+Email: javier.gomez@gmail.com
+Teléfono: 667890124
+Contraseña: javi4567
+Saludo: "Me gusta la música, la montaña y descubrir nuevos lugares. ¡Hablemos!"
+Fecha de nacimiento: 03/05/1997
+
+Nombre completo: Marta Ruiz Fernández
+Email: marta.ruiz@gmail.com
+Teléfono: 678901234
+Contraseña: marta2024
+Saludo: "Estudiante de arte. Me encanta pintar y los gatos."
+Fecha de nacimiento: 29/09/1998
+
+Nombre completo: Sergio Torres
+Email: sergio.torres@gmail.com
+Teléfono: 689012345
+Contraseña: sergio321
+Saludo: "Amante del deporte, los videojuegos y la cocina."
+Fecha de nacimiento: 14/01/2005
+
