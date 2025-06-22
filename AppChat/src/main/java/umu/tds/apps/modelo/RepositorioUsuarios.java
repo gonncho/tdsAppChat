@@ -56,6 +56,8 @@ public class RepositorioUsuarios {
 		usuarios.remove(usu.getTelefono());
 	}
 
+	// Carga todos los usuarios almacenados en la base de datos al crear la app
+	
 	private void catalogoUsuarios() throws DAOException {
 		List<Usuario> usuariosBD = adaptadorUsuario.recuperarTodosUsuarios();
 		for (Usuario usu : usuariosBD)

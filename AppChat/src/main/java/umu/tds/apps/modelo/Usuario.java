@@ -204,9 +204,12 @@ public class Usuario {
 		}
 	}
 
+	
 	public Chat obtenerChatCon(Usuario otroUsuario) {
 		return listaChats.stream().filter(ch -> ch.contieneUsuario(otroUsuario)).findFirst().orElse(null);
 	}
+	
+	
 	
 	// Devuelve una lista de mensajes entre este usuario y otro usuario, ordenados por fecha y hora.
 	public List<Mensaje> obtenerMensajesCon(Usuario otroUsuario) {

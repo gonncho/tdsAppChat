@@ -13,6 +13,8 @@ public class Chat {
 	private Usuario otroUsuario;
 	private List<Mensaje> mensajes;
 	
+	// Crea un chat entre dos usuarios e inicializa la lista de mensajes
+	
 	public Chat(Usuario usuario, Usuario otroUsuarioChat) {
 		this.usuario = usuario;
 		this.otroUsuario = otroUsuarioChat;
@@ -43,11 +45,14 @@ public class Chat {
 		this.otroUsuario = otroUsuarioChat;
 	}
 	
+	// Verifica si el chat pertenece al usuario pasado como parámetro
+	
 	public boolean contieneUsuario(Usuario otroUsuario) {
 		return usuario.equals(otroUsuario) || this.otroUsuario.equals(otroUsuario);
 	}
 	
-
+	// Devuelve una copia de la lista de mensajes
+	
 	public List<Mensaje> getMensajes() {
 		return new ArrayList<>(mensajes);
 	}
@@ -55,6 +60,8 @@ public class Chat {
 	public void setMensajes(List<Mensaje> mensajes) {
 		this.mensajes = mensajes;
 	}
+	
+	// Inserta un mensaje manteniendo el orden cronológico
 
 	public void addMensaje(Mensaje mensaje) {
 		Comparator<Mensaje> comp = Comparator.comparing(Mensaje::getFecha).thenComparing(Mensaje::getHora);

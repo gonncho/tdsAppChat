@@ -14,6 +14,8 @@ public class Grupo extends Contacto {
 	private ImageIcon imagenGrupo;
 	private List<Mensaje> mensajesEnviados;
 
+	// Constructor del grupo a partir de una lista de ocntactor y un creador
+	
 	public Grupo(String nombre, List<ContactoIndividual> listaContactos, Usuario creador, ImageIcon imagenGrupo) {
 		super(nombre); 
 		this.nombre = nombre;
@@ -61,6 +63,8 @@ public class Grupo extends Contacto {
 		return Collections.unmodifiableList(mensajesEnviados);
 	}
 
+	// Registra un mensaje enviado dentro del grupo
+	
 	public void addMensajeEnviado(Mensaje mensaje) {
 		mensajesEnviados.add(mensaje);
 	}
@@ -69,6 +73,8 @@ public class Grupo extends Contacto {
 		this.imagenGrupo = imagenGrupo;
 	}
 
+	// Añade un contacto al grupo si aún no existe
+	
 	public void agregarContacto(ContactoIndividual contacto) {
 		if (listaContactos.stream().noneMatch(contacto::equals)) {
 			listaContactos.add(contacto);

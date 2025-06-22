@@ -109,6 +109,8 @@ public class Mensaje {
 		this.hora = LocalDateTime.now();
     }
 
+    // Comprobar que el chat no sea nulo antes de iniciar un mensaje
+    
     private void validarChat(Chat chat) {
         if (chat == null) {
             throw new IllegalArgumentException("Error al acceder al chat: valor nulo");
